@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Garuda Linux @ DistroFest — Booth Signage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--c:#ff2352;--p:#a04dff;--t:#eceaf5;--m:#9a94b5;--h:Orbitron,'Arial Black',sans-serif;--mo:'Share Tech Mono',ui-monospace,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;font-family:Rajdhani,'Segoe UI',system-ui,sans-serif;color:var(--t)}
+body{display:grid;place-items:center}
+.stage{position:relative;width:min(100vw,177.78vh);height:min(56.25vw,100vh);container-type:size;overflow:hidden;background:radial-gradient(120% 90% at 72% 18%,#1d0c26 0,#0b0910 48%,#050507 100%)}
+.stage>*{position:absolute}
+#cv,.grid,.crt,.vg,.s{inset:0;width:100%;height:100%}
+.grid{background:linear-gradient(rgba(160,77,255,.09) 1px,transparent 1px) 0 0/4cqw 4cqw,linear-gradient(90deg,rgba(160,77,255,.09) 1px,transparent 1px) 0 0/4cqw 4cqw;animation:gm 40s linear infinite;-webkit-mask:radial-gradient(ellipse at center,#000 30%,transparent 85%);mask:radial-gradient(ellipse at center,#000 30%,transparent 85%)}
+@keyframes gm{to{background-position:0 4cqw,4cqw 0}}
+.dragon{left:50%;top:52%;width:62cqw;height:46cqw;opacity:.12;transition:opacity 2.5s;filter:drop-shadow(0 0 1.5cqw var(--c));animation:dr 22s ease-in-out infinite alternate}
+.i .dragon{opacity:.5}
+@keyframes dr{from{transform:translate(-50%,-50%) scale(1)}to{transform:translate(-50%,-52%) scale(1.06)}}
+.scan{left:0;right:0;height:10cqw;top:-10cqw;background:linear-gradient(transparent,rgba(255,35,82,.08),transparent);animation:sc 9s linear infinite;pointer-events:none}
+@keyframes sc{to{top:100%}}
+.crt{background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 1px,transparent 1px 3px);pointer-events:none;animation:fl 8s infinite}
+@keyframes fl{0%,90%,100%{opacity:.85}92%{opacity:.5}93%{opacity:.95}96%{opacity:.6}97%{opacity:.9}}
+.vg{background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.72));pointer-events:none}
+.brand{left:3cqw;top:2cqw;font:1.35cqw var(--mo);color:var(--m);letter-spacing:.15cqw;z-index:5;display:flex;align-items:center;gap:.8cqw}
+.brand svg{width:2cqw;height:2.4cqw}.brand b{color:var(--c);font-weight:400}
+.live{right:3cqw;top:2cqw;font:1.35cqw var(--mo);color:var(--m);z-index:5}.live u{text-decoration:none;color:var(--c);animation:bl 2.4s infinite}
+@keyframes bl{50%{opacity:.25}}
+#bar{left:5cqw;right:5cqw;bottom:2cqw;display:flex;gap:.6cqw;z-index:5}
+#bar div{flex:1;height:.35cqw;background:rgba(255,255,255,.12)}
+#bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c),var(--p));box-shadow:0 0 1cqw var(--c)}
+.s{opacity:0;transform:scale(1.03);filter:blur(6px);transition:opacity 2.2s ease,transform 2.6s ease,filter 2.2s ease;pointer-events:none}
+.s.on{opacity:1;transform:none;filter:none}
+.r{opacity:0}.on .r,.out .r{animation:ri 1.2s ease both;animation-delay:calc(var(--d,0)*.25s + .8s)}
+@keyframes ri{from{opacity:0;transform:translateY(2cqw)}to{opacity:1;transform:none}}
+.g{background:rgba(20,13,30,.58);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:.15cqw solid rgba(255,35,82,.5);border-radius:1cqw;box-shadow:0 0 2cqw rgba(255,35,82,.2),inset 0 0 3cqw rgba(160,77,255,.1)}
+.txt{position:absolute;left:5cqw;top:11cqw;width:45cqw;padding:2.6cqw 3cqw}
+.no{font:1.7cqw var(--mo);color:var(--c);letter-spacing:.35cqw}
+h2{font:900 4.3cqw/1.1 var(--h);margin:.8cqw 0 2cqw;text-shadow:0 0 1.2cqw rgba(255,35,82,.7)}
+li{list-style:none;font-weight:700;font-size:2.5cqw;letter-spacing:.12cqw;padding:.9cqw 0 .9cqw 3.2cqw;position:relative;border-top:.1cqw solid rgba(255,255,255,.1)}
+li:before{content:"▶";position:absolute;left:0;color:var(--c);font-size:1.7cqw;top:1.4cqw}
+.vis{position:absolute;left:53cqw;top:9cqw;width:42cqw;height:40cqw}
+.vis>*{position:absolute}
+.ctr{position:absolute;left:0;right:0;top:12cqw;text-align:center}
+.grad{background:linear-gradient(90deg,#fff,var(--c) 45%,var(--p));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 1.4cqw rgba(255,35,82,.55))}
+.ti{font:900 9.6cqw/1 var(--h)}.df{font:900 6.2cqw/1.2 var(--h);letter-spacing:1.4cqw;color:transparent;-webkit-text-stroke:.18cqw #fff;text-shadow:0 0 2cqw var(--p)}
+.sub{font:2.8cqw var(--mo);color:#fff;margin-top:2.5cqw;letter-spacing:.3cqw}
+.log{left:4cqw;bottom:6cqw;width:24cqw;height:10cqw;overflow:hidden;padding:1cqw 1.4cqw;font:1.2cqw/1.6 var(--mo);color:var(--m)}
+.log .in{animation:lg 14s linear infinite}.log b{color:#22e6a0;font-weight:400}
+@keyframes lg{to{transform:translateY(-50%)}}
+.ring{right:5cqw;bottom:5cqw;width:11cqw;height:11cqw}.ring svg{width:100%;height:100%;animation:sp2 30s linear infinite}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font:1.3cqw var(--mo);color:var(--c)}
+@keyframes sp2{to{transform:rotate(360deg)}}
+/* gaming */
+.hb{top:0;left:0;right:0;display:flex;align-items:center;gap:1.5cqw}.hb b{font:900 3.6cqw var(--h);text-shadow:0 0 1cqw var(--c)}
+.bar{flex:1;height:2.4cqw;border:.15cqw solid var(--c);transform:skewX(-20deg);padding:.25cqw}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c),#ff8aa5);animation:hp 8s ease-in-out infinite alternate}
+.bar.rv{transform:skewX(20deg);border-color:var(--p)}.rv i{margin-left:auto;background:linear-gradient(90deg,#d2b0ff,var(--p));animation-delay:-4s}
+@keyframes hp{from{width:100%}to{width:42%}}
+.vs{left:0;right:0;top:8cqw;text-align:center;font:900 16cqw/1 var(--h)}
+.pd{width:15cqw;height:10.5cqw;bottom:1cqw;filter:drop-shadow(0 0 1cqw var(--c));animation:fy 6s ease-in-out infinite alternate}
+.pd.a{left:3cqw}.pd.b{right:3cqw;animation-delay:-3s}
+@keyframes fy{to{transform:translateY(-1.5cqw)}}
+/* luck */
+.wheel{left:0;top:3cqw;width:28cqw;height:28cqw;border-radius:50%;background:repeating-conic-gradient(#c81a3f 0 45deg,#150d1e 45deg 90deg,#7a35d6 90deg 135deg,#150d1e 135deg 180deg);border:.4cqw solid #fff;box-shadow:0 0 3cqw var(--c),0 0 6cqw rgba(160,77,255,.5),inset 0 0 3cqw #000;animation:sp2 40s linear infinite}
+.wheel span{position:absolute;left:50%;top:50%;width:3cqw;height:3cqw;margin:-1.5cqw;font-size:2.6cqw;text-align:center}
+.hub{left:11.5cqw;top:14.5cqw;width:5cqw;height:5cqw;border-radius:50%;background:#0a0710;border:.3cqw solid var(--c);box-shadow:0 0 1.5cqw var(--c);display:grid;place-items:center;font-size:2.2cqw}
+.ptr{left:12.6cqw;top:0;border:1.4cqw solid transparent;border-top:3cqw solid #fff;filter:drop-shadow(0 0 .8cqw var(--c))}
+.punch{left:29.5cqw;top:3cqw;width:12.5cqw;padding:1.2cqw;display:grid;grid-template-columns:repeat(4,1fr);gap:.9cqw}
+.punch i{aspect-ratio:1;border-radius:50%;background:#07050a;border:.15cqw solid var(--p);animation:ph 5s ease-in-out infinite}
+.punch i:nth-child(3n){animation-delay:-1.5s}.punch i:nth-child(5n){animation-delay:-3s;border-color:var(--c)}
+@keyframes ph{50%{box-shadow:0 0 1cqw var(--c);background:#2a0d1c}}
+.mb{width:6cqw;height:6cqw;border:.2cqw solid var(--c);background:rgba(255,35,82,.12);display:grid;place-items:center;font:900 3cqw var(--h);box-shadow:0 0 1.5cqw var(--c);animation:fy 5s ease-in-out infinite alternate}
+.dg{left:0;top:34cqw;font:2.2cqw var(--mo);color:var(--m)}.dg em{font-style:normal;color:#fff;text-shadow:0 0 1cqw var(--p)}
+/* cube */
+.cw{perspective:70cqw}.cube{--s:15cqw;position:relative;width:var(--s);height:var(--s);transform-style:preserve-3d;animation:cs 18s linear infinite}
+.cube.sm{--s:6.5cqw;animation-duration:26s;animation-direction:reverse}
+@keyframes cs{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+.f{position:absolute;inset:0;display:grid;grid:repeat(3,1fr)/repeat(3,1fr);gap:4%;padding:4%;background:#08060c;border:1px solid #000;backface-visibility:hidden}
+.f i{border-radius:9%}
+.fr{transform:translateZ(calc(var(--s)/2))}.bk{transform:rotateY(180deg) translateZ(calc(var(--s)/2))}.rt{transform:rotateY(90deg) translateZ(calc(var(--s)/2))}.lf{transform:rotateY(-90deg) translateZ(calc(var(--s)/2))}.tp{transform:rotateX(90deg) translateZ(calc(var(--s)/2))}.bt{transform:rotateX(-90deg) translateZ(calc(var(--s)/2))}
+.sw{font:900 5.4cqw var(--h);text-shadow:0 0 1.4cqw var(--c)}.pnl{padding:1.6cqw 2cqw}
+.rk{display:flex;justify-content:space-between;font:1.9cqw var(--mo);padding:.6cqw 0;border-top:.1cqw solid rgba(255,255,255,.1)}.rk b{color:var(--c);font-weight:400}
+/* trivia */
+.term{left:0;top:0;width:42cqw;padding:1.4cqw 2cqw;font:2cqw/1.65 var(--mo);height:21cqw}
+.dots{display:flex;gap:.6cqw;margin-bottom:.6cqw;color:var(--m);font-size:1.2cqw;align-items:center}.dots i{width:1cqw;height:1cqw;border-radius:50%;background:var(--c)}.dots i+i{background:var(--p)}.dots i+i+i{background:#22e6a0}
+.term p{opacity:0}.on .term p,.out .term p{animation:ri .8s ease both;animation-delay:calc(var(--d)*.55s + 1.2s)}
+.term em{color:var(--c);font-style:normal}.term u{text-decoration:none;color:#22e6a0}.cur{display:inline-block;width:1cqw;height:2cqw;background:var(--c);vertical-align:middle;animation:bl 1s steps(2) infinite}
+.qc{left:0;top:23.5cqw;width:42cqw;padding:1.6cqw 2cqw}.qc h3{font:700 2.6cqw var(--h);margin-bottom:1.4cqw}
+.ch{display:flex;gap:2cqw}.ch div{flex:1;text-align:center;font:900 2cqw var(--h);padding:1cqw;border:.2cqw solid;animation:ck 8s infinite}
+.ch .y{border-color:#22e6a0;color:#22e6a0}.ch .n{border-color:var(--c);color:var(--c);animation-delay:-4s}
+@keyframes ck{0%,45%{box-shadow:0 0 2cqw currentColor;background:rgba(255,255,255,.1)}55%,100%{box-shadow:none;background:none;opacity:.55}}
+/* desktop */
+.desk{left:0;top:0;width:42cqw;height:38cqw;overflow:hidden;background:linear-gradient(135deg,#160a20,#0b0812)}
+.top{height:2.6cqw;background:rgba(0,0,0,.5);display:flex;align-items:center;gap:1.2cqw;padding:0 1.2cqw;font:1.2cqw var(--mo);color:var(--m)}
+.win{position:absolute;background:rgba(10,7,16,.85);border:.15cqw solid var(--p);border-radius:.6cqw;padding:1cqw 1.4cqw;font:1.35cqw/1.55 var(--mo);box-shadow:0 0 1.5cqw rgba(160,77,255,.35)}
+.win h4{font:700 1.2cqw var(--mo);color:var(--m);margin-bottom:.4cqw}.win em{color:var(--c);font-style:normal}
+.mt{display:flex;align-items:center;gap:.8cqw;margin:.5cqw 0}.mt span{width:4cqw}.mt div{flex:1;height:1cqw;background:#211a2e}.mt i{display:block;height:100%;background:linear-gradient(90deg,var(--c),var(--p));animation:mm 7s ease-in-out infinite alternate}.mt:nth-child(3) i{animation-delay:-2s}.mt:nth-child(4) i{animation-delay:-4s}
+@keyframes mm{from{width:20%}to{width:85%}}
+.dock{left:9cqw;bottom:1.4cqw;display:flex;gap:1.4cqw;padding:.8cqw 1.4cqw;background:rgba(0,0,0,.55);border:.12cqw solid rgba(255,255,255,.2);border-radius:1.2cqw;position:absolute}.dock i{font-style:normal;font-size:2.6cqw;width:3.6cqw;height:3.6cqw;display:grid;place-items:center;border-radius:.8cqw;background:rgba(160,77,255,.25)}
+/* photo */
+.frm{left:3cqw;top:1cqw;width:36cqw;height:27cqw;background:radial-gradient(circle,#1e1230,#09060f);border:.15cqw solid var(--p);box-shadow:0 0 2.5cqw rgba(160,77,255,.5);overflow:hidden}
+.k{position:absolute;width:3.5cqw;height:3.5cqw;border:.35cqw solid var(--c);filter:drop-shadow(0 0 .6cqw var(--c))}.k1{left:1cqw;top:1cqw;border-right:0;border-bottom:0}.k2{right:1cqw;top:1cqw;border-left:0;border-bottom:0}.k3{left:1cqw;bottom:1cqw;border-right:0;border-top:0}.k4{right:1cqw;bottom:1cqw;border-left:0;border-top:0}
+.cd{position:absolute;inset:0;display:grid;place-items:center;font:900 10cqw var(--h);color:rgba(255,255,255,.85);text-shadow:0 0 2cqw var(--c)}
+.rec{position:absolute;left:5cqw;top:1.6cqw;font:1.4cqw var(--mo);color:var(--c)}
+.fh{position:absolute;inset:0;background:#fff;opacity:0;animation:fh 8s infinite}@keyframes fh{0%,96%{opacity:0}97%{opacity:.35}100%{opacity:0}}
+.frm .tx{position:absolute;left:3cqw;bottom:2.5cqw;width:6cqw;height:7.2cqw}.frm .dq{position:absolute;right:3cqw;top:3cqw;width:9cqw;height:7cqw;opacity:.7}
+.chips{left:3cqw;top:30cqw;display:flex;gap:1.6cqw;font:1.7cqw var(--mo)}.chips span{padding:.8cqw 1.4cqw;border:.12cqw solid var(--c);color:var(--t);background:rgba(255,35,82,.12)}
+/* leaderboards */
+.lb{position:absolute;top:22cqw;width:43cqw;padding:1.6cqw 2.2cqw}
+.lb h3{font:700 2.4cqw var(--h);margin-bottom:1cqw}
+.row{display:flex;align-items:center;gap:1.6cqw;font:700 2.3cqw var(--h);padding:.9cqw 1cqw;border-top:.1cqw solid rgba(255,255,255,.1)}
+.row b{width:3cqw;color:var(--c)}.row span{flex:1;font:2.1cqw var(--mo)}.row em{font-style:normal;font-size:2.1cqw}
+.row.one{background:linear-gradient(90deg,rgba(255,35,82,.28),transparent);box-shadow:0 0 2cqw rgba(255,35,82,.3);animation:pu 4s ease-in-out infinite alternate}
+@keyframes pu{to{box-shadow:0 0 3.5cqw rgba(255,35,82,.6)}}
+/* cta */
+.cta{font:900 6.4cqw/1.12 var(--h)}.s2{font:700 2.9cqw var(--h);letter-spacing:.3cqw;margin-top:3cqw;color:#fff}.tg{font:2.4cqw var(--mo);color:var(--c);margin-top:1.6cqw;letter-spacing:.4cqw}
+.chev{left:50%;bottom:6cqw;transform:translateX(-50%);text-align:center;font:1.5cqw var(--mo);color:var(--m)}.chev i{display:block;width:3cqw;height:3cqw;margin:-.6cqw auto;border-right:.5cqw solid var(--c);border-bottom:.5cqw solid var(--c);transform:rotate(45deg);animation:cv 2.4s infinite;filter:drop-shadow(0 0 .8cqw var(--c))}.chev i:nth-child(2){animation-delay:.4s}.chev i:nth-child(3){animation-delay:.8s}
+@keyframes cv{0%,100%{opacity:.15}50%{opacity:1}}
+.ar{top:26cqw;font:900 5cqw var(--h);color:var(--c);letter-spacing:-.6cqw;animation:bl 2.4s infinite}.ar.l{left:4cqw}.ar.rr{right:4cqw;transform:scaleX(-1)}
+</style></head><body>
+<div class="stage" id="st">
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="gr" x1="0" x2="1"><stop offset="0" stop-color="#ff2352"/><stop offset="1" stop-color="#a04dff"/></linearGradient>
+<symbol id="dr" viewBox="0 0 400 300"><g fill="url(#gr)" fill-opacity=".28" stroke="url(#gr)" stroke-width="2.5" stroke-linejoin="round"><g id="wg"><path d="M182 96 92 36 14 58 72 82 8 110 74 122 28 164 104 150 60 206 136 178 188 150Z"/><path d="M182 118 120 100M182 132 98 132M186 146 84 172" fill="none"/></g><use href="#wg" transform="translate(400 0) scale(-1 1)"/><path d="M200 22 228 84 216 138 226 200 200 262 174 200 184 138 172 84Z"/><path d="M186 70 214 70 200 92Z" fill="#ff2352" stroke="none"/></g></symbol>
+<symbol id="tx" viewBox="0 0 60 72"><ellipse cx="30" cy="40" rx="20" ry="27" fill="#14121c" stroke="#fff" stroke-width="2"/><ellipse cx="30" cy="46" rx="12" ry="18" fill="#f2f0fa"/><circle cx="24" cy="24" r="3" fill="#fff"/><circle cx="36" cy="24" r="3" fill="#fff"/><circle cx="24" cy="24" r="1.3"/><circle cx="36" cy="24" r="1.3"/><path d="M23 30Q30 27 37 30L30 38Z" fill="#ffb400"/><ellipse cx="20" cy="68" rx="9" ry="4" fill="#ffb400"/><ellipse cx="40" cy="68" rx="9" ry="4" fill="#ffb400"/></symbol>
+<symbol id="pd" viewBox="0 0 100 70"><path d="M12 28Q12 10 32 10H68Q88 10 88 28L96 54Q98 64 88 64Q80 64 74 52H26Q20 64 12 64Q2 64 4 54Z" fill="rgba(255,35,82,.12)" stroke="#ff2352" stroke-width="2.5"/><path d="M28 24v12M22 30h12" stroke="#fff" stroke-width="3"/><circle cx="70" cy="24" r="3.5" fill="#a04dff"/><circle cx="78" cy="32" r="3.5" fill="#ff2352"/><circle cx="62" cy="32" r="3.5" fill="#22e6ff"/><circle cx="70" cy="40" r="3.5" fill="#fff"/></symbol>
+</defs></svg>
+<canvas id="cv"></canvas><div class="grid"></div>
+<svg class="dragon" viewBox="0 0 400 300"><use href="#dr"/></svg>
+<div class="brand"><svg viewBox="0 0 60 72"><use href="#tx"/></svg><span><b>▍</b>GARUDA://DISTROFEST</span></div>
+<div class="live"><u>●</u> BOOTH ONLINE</div>
+
+<!-- 0 INTRO -->
+<section class="s" data-t="7">
+ <div class="ctr"><div class="no r">&gt;_ BOOT SEQUENCE // OPEN SOURCE SHOWCASE</div>
+ <h1 class="ti grad r" style="--d:1;margin-top:2cqw">GARUDA LINUX</h1>
+ <h1 class="df r" style="--d:2">DISTROFEST</h1>
+ <p class="sub r" style="--d:3">Explore. Play. Test. Discover.</p></div>
+ <div class="log g r" style="--d:4"><div class="in" id="lg"></div></div>
+ <div class="ring r" style="--d:4"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="#a04dff" stroke-width="1.5" stroke-dasharray="3 6"/><circle cx="50" cy="50" r="36" stroke="#ff2352" stroke-width="2" stroke-dasharray="40 20"/></svg><span>SYS OK</span></div>
+</section>
+
+<!-- 1 GAMING -->
+<section class="s" data-t="8">
+ <div class="txt g r"><div class="no">01 // ACTIVITY</div><h2>GAMING ZONE 🎮</h2><ul><li>TEKKEN TOURNAMENT</li><li>PS5 2-PLAYER GAMES</li></ul></div>
+ <div class="vis"><div class="hb r" style="--d:1"><div class="bar"><i></i></div><b>99</b><div class="bar rv"><i></i></div></div>
+ <div class="vs grad r" style="--d:2">VS</div>
+ <svg class="pd a r" style="--d:3" viewBox="0 0 100 70"><use href="#pd"/></svg><svg class="pd b r" style="--d:3" viewBox="0 0 100 70"><use href="#pd"/></svg></div>
+</section>
+
+<!-- 2 LUCK -->
+<section class="s" data-t="7">
+ <div class="txt g r"><div class="no">02 // ACTIVITY</div><h2>LUCK &amp; PRIZES 🎡</h2><ul><li>GARUDA ROULETTE</li><li>PUNCH BOARD</li></ul></div>
+ <div class="vis"><div class="wheel r" id="wh" style="--d:1"></div><div class="ptr r"></div><div class="hub r">🐉</div>
+ <div class="punch g r" style="--d:2"></div>
+ <div class="mb r" style="left:29.5cqw;top:23cqw">?</div><div class="mb r" style="left:36.5cqw;top:26cqw;animation-delay:-2.5s">?</div>
+ <div class="dg r" style="--d:3">LUCKY #: <em class="rnd">07</em> <em class="rnd">42</em> <em class="rnd">18</em></div></div>
+</section>
+
+<!-- 3 SKILL -->
+<section class="s" data-t="7">
+ <div class="txt g r"><div class="no">03 // ACTIVITY</div><h2>SKILL CHALLENGES 🧩</h2><ul><li>RUBIK’S CUBE SPEED CHALLENGE</li></ul></div>
+ <div class="vis"><div class="cw" style="left:5cqw;top:6cqw"><div class="cube"></div></div>
+ <div class="cw" style="left:1cqw;top:26cqw"><div class="cube sm"></div></div><div class="cw" style="left:20cqw;top:29cqw"><div class="cube sm"></div></div>
+ <div class="g pnl r" style="left:23cqw;top:2cqw;width:19cqw;--d:2"><div class="no" style="font-size:1.3cqw">TIMER</div><div class="sw">00.00</div></div>
+ <div class="g pnl r" style="left:23cqw;top:14cqw;width:19cqw;--d:3"><div class="rk"><b>#1</b><span>PLAYER_01</span></div><div class="rk"><b>#2</b><span>PLAYER_02</span></div><div class="rk"><b>#3</b><span>PLAYER_03</span></div></div></div>
+</section>
+
+<!-- 4 TRIVIA -->
+<section class="s" data-t="8">
+ <div class="txt g r"><div class="no">04 // ACTIVITY</div><h2>TRIVIA &amp; INTERACTIVE 🧠</h2><ul><li>GARUDA FACT OR CAP</li><li>GARUDA TRIVIA</li><li>LINUX COMMAND QUESTIONS</li></ul></div>
+ <div class="vis"><div class="term g r" style="--d:1"><div class="dots"><i></i><i></i><i></i>&nbsp;garuda@distrofest:~</div>
+ <p style="--d:0"><em>$</em> sudo pacman -Syu</p><p style="--d:1"><em>$</em> cd ~/garuda</p><p style="--d:2"><em>$</em> ls</p><p style="--d:3"><u>apps  themes  quiz</u></p><p style="--d:4"><em>$</em> neofetch<span class="cur"></span></p></div>
+ <div class="qc g r" style="--d:3"><h3>Garuda Linux is based on Arch?</h3><div class="ch"><div class="y">✔ CORRECT</div><div class="n">✘ INCORRECT</div></div></div></div>
+</section>
+
+<!-- 5 EXPERIENCE -->
+<section class="s" data-t="8">
+ <div class="txt g r"><div class="no">05 // ACTIVITY</div><h2>GARUDA EXPERIENCE 💻</h2><ul><li>GARUDA LINUX LIVE DEMO</li><li>GARUDA APPLICATION SHOWCASE</li><li>GARUDA DESKTOP EXPLORATION</li></ul></div>
+ <div class="vis"><div class="desk g r" style="--d:1"><div class="top"><span style="color:var(--c)">◆ Garuda</span><span>Terminal</span><span>Monitor</span></div>
+ <div class="win" style="left:2cqw;top:5cqw;width:22cqw"><h4>konsole</h4><span style="display:inline-block;width:5cqw;vertical-align:top"><svg viewBox="0 0 60 72" style="width:4.5cqw"><use href="#tx"/></svg></span><span style="display:inline-block"><em>garuda</em>@linux<br>OS: Garuda Linux<br>DE: Dr460nized<br>Kernel: linux-zen</span></div>
+ <div class="win" style="left:26cqw;top:9cqw;width:14cqw"><h4>system monitor</h4><div class="mt"><span>CPU</span><div><i></i></div></div><div class="mt"><span>RAM</span><div><i></i></div></div><div class="mt"><span>GPU</span><div><i></i></div></div></div>
+ <div class="win" style="left:5cqw;top:17.5cqw;width:20cqw"><h4>garuda assistant</h4>⚙ Themes<br>⚙ Snapshots<br>⚙ Gaming meta</div>
+ <div class="dock"><i>🌐</i><i>📁</i><i>🎮</i><i>⚙️</i><i>🐉</i></div></div></div>
+</section>
+
+<!-- 6 PHOTO -->
+<section class="s" data-t="7">
+ <div class="txt g r"><div class="no">06 // ACTIVITY</div><h2>PHOTOBOOTH 📸</h2><ul><li>LINUX-THEMED PHOTOBOOTH</li></ul></div>
+ <div class="vis"><div class="frm r" style="--d:1"><i class="k k1"></i><i class="k k2"></i><i class="k k3"></i><i class="k k4"></i>
+ <div class="rec">● REC  tux@cam0</div><svg class="tx" viewBox="0 0 60 72"><use href="#tx"/></svg><svg class="dq" viewBox="0 0 400 300"><use href="#dr"/></svg><div class="cd">3</div><div class="fh"></div></div>
+ <div class="chips r" style="--d:3"><span>▣ FRAMES</span><span>✦ STICKERS</span><span>◐ FILTERS</span></div></div>
+</section>
+
+<!-- 7 LEADERBOARDS -->
+<section class="s" data-t="7">
+ <div class="txt g r" style="width:auto;padding:1.6cqw 3cqw;top:9cqw"><div class="no">07 // ACTIVITY</div><h2 style="margin:.4cqw 0 0">LEADERBOARDS 🏆</h2></div>
+ <div class="lb g r" style="left:4cqw;--d:1"><h3>TEKKEN LEADERBOARD</h3>
+ <div class="row one"><b>👑</b><span>PLAYER_01</span><em data-v="12">0</em></div><div class="row"><b>2</b><span>PLAYER_02</span><em data-v="9">0</em></div><div class="row"><b>3</b><span>PLAYER_03</span><em data-v="7">0</em></div><div class="row"><b>4</b><span>PLAYER_04</span><em data-v="5">0</em></div></div>
+ <div class="lb g r" style="right:4cqw;--d:2"><h3>RUBIK’S CUBE LEADERBOARD</h3>
+ <div class="row one"><b>👑</b><span>PLAYER_01</span><em data-v="12.48" data-f="1">0</em></div><div class="row"><b>2</b><span>PLAYER_02</span><em data-v="15.92" data-f="1">0</em></div><div class="row"><b>3</b><span>PLAYER_03</span><em data-v="18.30" data-f="1">0</em></div><div class="row"><b>4</b><span>PLAYER_04</span><em data-v="21.75" data-f="1">0</em></div></div>
+</section>
+
+<!-- 8 CTA -->
+<section class="s" data-t="7">
+ <div class="ctr" style="top:10cqw"><div class="no r">// NOW OPEN</div>
+ <h1 class="cta grad r" style="--d:1;margin-top:2cqw">READY TO TAKE ON<br>THE CHALLENGE?</h1>
+ <p class="s2 r" style="--d:2">PLAY • COMPETE • LEARN • EXPLORE LINUX</p>
+ <p class="tg r" style="--d:3">GARUDA LINUX @ DISTROFEST</p></div>
+ <div class="ar l">»»»</div><div class="ar rr">»»»</div>
+ <div class="chev r" style="--d:4">STEP UP TO THE BOOTH<i></i><i></i><i></i></div>
+</section>
+
+<div class="scan"></div><div class="crt"></div><div class="vg"></div><div id="bar"></div>
+</div>
+<script>
+const $=s=>document.querySelector(s),S=[...document.querySelectorAll('.s')],st=$('#st'),bar=$('#bar'),C=['#ff2352','#a04dff','#f4f2fa','#22e6ff','#ffd21f','#22e6a0'];
+document.querySelectorAll('.cube').forEach(c=>['fr','bk','rt','lf','tp','bt'].forEach(k=>{const f=document.createElement('div');f.className='f '+k;for(let i=0;i<9;i++){const u=document.createElement('i');u.style.background=C[Math.random()*6|0];f.append(u)}c.append(f)}));
+const wh=$('#wh');['🎁','⭐','💎','🎟️','🏆','🎧','🐧','🐉'].forEach((e,i)=>{const s=document.createElement('span');s.textContent=e;s.style.transform=`rotate(${22.5+45*i}deg) translateY(-10cqw)`;wh.append(s)});
+document.querySelector('.punch').innerHTML='<i></i>'.repeat(20);
+const L=['<b>[ OK ]</b> Started Garuda Assistant','<b>[ OK ]</b> Loaded linux-zen kernel','<b>[ OK ]</b> Mounted BTRFS snapshots','<b>[ OK ]</b> Reached Graphical Interface','<b>[ OK ]</b> Started Dr460nized shell','<b>[ OK ]</b> Ready for DistroFest'].map(x=>x+'<br>').join('');
+$('#lg').innerHTML=L+L;
+const T=S.map(s=>+s.dataset.t),segs=T.map(()=>{const d=document.createElement('div');d.innerHTML='<i></i>';bar.append(d);return d});
+function count(s){setTimeout(()=>s.querySelectorAll('em[data-v]').forEach(e=>{const v=+e.dataset.v,f=e.dataset.f,t0=performance.now();(function k(t){const p=Math.min(1,(t-t0)/2200),x=v*(1-Math.pow(1-p,3));e.textContent=f?x.toFixed(2)+'s':Math.round(x)+' W';p<1&&requestAnimationFrame(k)})(t0)}),900)}
+let n=-1;
+function go(){const p=S[n];if(p){p.classList.remove('on');p.classList.add('out');setTimeout(()=>p.classList.remove('out'),2400)}
+n=(n+1)%S.length;const s=S[n];s.classList.add('on');st.classList.toggle('i',n==0);
+segs.forEach((g,k)=>{const f=g.firstChild;f.style.transition='none';f.style.width=k<n?'100%':'0'});void bar.offsetWidth;
+const f=segs[n].firstChild;f.style.transition=`width ${T[n]}s linear`;f.style.width='100%';count(s);setTimeout(go,T[n]*1000)}
+go();
+let k=0;
+setInterval(()=>{const t=(performance.now()/1000)%45;$('.sw').textContent=String(t|0).padStart(2,'0')+'.'+String(t%1*100|0).padStart(2,'0')},70);
+setInterval(()=>document.querySelectorAll('.rnd').forEach(e=>e.textContent=String(Math.random()*100|0).padStart(2,'0')),1200);
+setInterval(()=>$('.cd').textContent=3-(k++%3),1000);
+addEventListener('keydown',e=>{if(e.key=='f')document.fullscreenElement?document.exitFullscreen():st.requestFullscreen()});
+const cv=$('#cv'),x=cv.getContext('2d');let W,H;const P=[];
+function rs(){W=cv.width=st.clientWidth;H=cv.height=st.clientHeight}rs();addEventListener('resize',rs);
+for(let i=0;i<70;i++)P.push({x:Math.random(),y:Math.random(),r:Math.random()*2+.6,v:Math.random()*.02+.01,c:Math.random()<.6?'255,35,82':'160,77,255',p:Math.random()*6});
+(function d(){x.clearRect(0,0,W,H);P.forEach(q=>{q.y-=q.v/40;q.p+=.006;q.x+=Math.sin(q.p)*.0002;if(q.y<0)q.y=1;x.beginPath();x.fillStyle=`rgba(${q.c},${.4+.3*Math.sin(q.p*3)})`;x.shadowColor=`rgb(${q.c})`;x.shadowBlur=8;x.arc(q.x*W,q.y*H,q.r*W/700,0,7);x.fill()});requestAnimationFrame(d)})();
+</script></body></html>
