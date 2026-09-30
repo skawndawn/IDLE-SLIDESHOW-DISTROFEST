@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Garuda Linux — Fact or Cap</title>
+<style>
+:root{--pink:#ff3dcc;--purple:#9b4dff;--bg:#07070c;--panel:#11111b;--muted:#a9a9b5;--green:#52ff9b;--red:#ff5577}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;background:#07070c;color:#fff}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% 0%,#7d174c55,transparent 42%),radial-gradient(circle at 90% 90%,#5b21a644,transparent 35%),#07070c}
+body:after{content:"";position:fixed;inset:0;z-index:-1;opacity:.12;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:60px 60px}
+.container{width:min(1080px,94vw);padding:28px 0}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:18px}
+.brand{font-weight:900;letter-spacing:2px;color:#fff}.brand span{color:var(--pink)}
+.navbtn{background:#151522;border:1px solid #ffffff18;color:#ddd;padding:10px 14px;border-radius:10px;cursor:pointer}
+.panel{background:#101018ee;border:1px solid #ffffff16;border-radius:24px;padding:34px;box-shadow:0 20px 80px #0008;backdrop-filter:blur(10px)}
+.center{text-align:center}.eyebrow{color:var(--pink);letter-spacing:4px;font-size:13px;font-weight:800}
+h1{font-size:clamp(40px,7vw,76px);margin:10px 0;background:linear-gradient(90deg,#fff,var(--pink),#9b4dff);-webkit-background-clip:text;color:transparent}
+h2{font-size:32px}.sub{color:var(--muted)}
+input{width:100%;max-width:520px;padding:17px 18px;background:#090910;border:1px solid #ffffff1c;color:#fff;border-radius:12px;font-size:18px;outline:none}
+input:focus{border-color:var(--pink)}button{font:inherit}
+.primary{margin-top:15px;padding:15px 25px;border:0;border-radius:12px;background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;font-weight:900;cursor:pointer;box-shadow:0 8px 25px #9b4dff44}
+.hidden{display:none!important}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px}
+.progress{height:8px;background:#ffffff12;border-radius:99px;overflow:hidden;margin:12px 0 30px}.bar{height:100%;background:linear-gradient(90deg,var(--pink),var(--purple));transition:.3s}
+.qnum{color:var(--pink);font-weight:800;letter-spacing:2px}.question{font-size:clamp(28px,4vw,50px);line-height:1.15;min-height:150px;display:flex;align-items:center;justify-content:center;margin:20px 0 30px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:18px}.answer{padding:25px;border-radius:16px;border:2px solid #ffffff14;background:#171720;color:#fff;font-size:25px;font-weight:900;cursor:pointer;transition:.15s}.answer:hover{transform:translateY(-2px);border-color:var(--pink);background:#211526}
+.answer.fact{color:var(--green)}.answer.myth{color:#ff6688}
+.feedback{text-align:center;min-height:34px;font-size:20px;font-weight:900;margin-top:18px}
+.score{color:#aaa}
+table{width:100%;border-collapse:collapse;margin-top:20px}th,td{padding:12px;border-bottom:1px solid #ffffff12;text-align:left}th{color:var(--pink)}
+.rank{font-weight:900;color:#ffd85a}
+.final-score{font-size:100px;font-weight:1000;line-height:1;background:linear-gradient(90deg,#fff,var(--pink));-webkit-background-clip:text;color:transparent}
+.perfect{animation:pulse 1s infinite alternate}@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.06);filter:drop-shadow(0 0 25px #ff3dcc)}}
+.confetti{position:fixed;top:-20px;width:9px;height:18px;animation:fall 2.5s linear forwards;z-index:5}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+@media(max-width:650px){.answers{grid-template-columns:1fr}.panel{padding:24px}.question{min-height:210px}header{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="container">
+<header><div class="brand">🐉 GARUDA <span>LINUX</span> • DISTROFEST</div><button class="navbtn" onclick="showLeaderboard()">🏆 Leaderboard</button></header>
+
+<section id="start" class="panel center">
+<div class="eyebrow">FACT OR CAP • OFFLINE CHALLENGE</div>
+<h1>MYTH OR FACT?</h1>
+<p class="sub">200-question pool • 5 random questions per player</p>
+<input id="name" maxlength="20" placeholder="Enter player name">
+<br><button class="primary" onclick="startGame()">START CHALLENGE →</button>
+<p class="sub">Choose FACT or MYTH. Get all 5 correct for a PERFECT score!</p>
+</section>
+
+<section id="game" class="panel hidden">
+<div class="top"><span id="progressText">QUESTION 1 OF 5</span><span id="scoreText">Score: 0</span></div>
+<div class="progress"><div id="bar" class="bar" style="width:20%"></div></div>
+<div class="qnum" id="qnum">QUESTION #</div>
+<div class="question" id="question"></div>
+<div class="answers">
+<button class="answer fact" onclick="submitAnswer(true)">✓ FACT</button>
+<button class="answer myth" onclick="submitAnswer(false)">✕ MYTH</button>
+</div>
+<div class="feedback" id="feedback"></div>
+</section>
+
+<section id="final" class="panel center hidden">
+<div class="eyebrow" id="finalEyebrow">CHALLENGE COMPLETE</div>
+<h1 id="finalTitle">YOUR SCORE</h1>
+<div id="finalScore" class="final-score">0 / 5</div>
+<p id="finalMessage" class="sub"></p>
+<div id="finalDetails"></div>
+<button class="primary" onclick="newPlayer()">NEXT PLAYER →</button>
+<button class="navbtn" onclick="showLeaderboard()">VIEW LEADERBOARD</button>
+</section>
+
+<section id="leaderboard" class="panel hidden">
+<div class="center"><div class="eyebrow">LOCAL SCOREBOARD</div><h2>🏆 LEADERBOARD</h2><p class="sub">Scores are saved in this browser only.</p></div>
+<div id="board"></div>
+<div class="center"><button class="primary" onclick="newPlayer()">NEW PLAYER</button> <button class="navbtn" onclick="goStart()">BACK</button></div>
+</section>
+</div>
+<script>
+const QUESTIONS = [{"n": 1, "a": "FACT", "q": "CPU stands for Central Processing Unit."}, {"n": 2, "a": "MYTH", "q": "RAM is a type of permanent storage."}, {"n": 3, "a": "FACT", "q": "An SSD generally has no moving mechanical parts."}, {"n": 4, "a": "FACT", "q": "A GPU is primarily designed to process graphics and parallel workloads."}, {"n": 5, "a": "FACT", "q": "1 byte is equal to 8 bits."}, {"n": 6, "a": "MYTH", "q": "A keyboard is an output device."}, {"n": 7, "a": "FACT", "q": "A monitor is an output device."}, {"n": 8, "a": "FACT", "q": "USB stands for Universal Serial Bus."}, {"n": 9, "a": "MYTH", "q": "BIOS is stored on the computer"s hard drive."}, {"n": 10, "a": "FACT", "q": "An operating system manages hardware and software resources."}, {"n": 11, "a": "FACT", "q": "Windows, Linux, and macOS are operating systems."}, {"n": 12, "a": "FACT", "q": "A computer can operate without an operating system."}, {"n": 13, "a": "FACT", "q": "The motherboard connects many of the computer"s major components."}, {"n": 14, "a": "FACT", "q": "Cache memory is generally faster than RAM."}, {"n": 15, "a": "FACT", "q": "A computer"s CPU can execute instructions."}, {"n": 16, "a": "FACT", "q": "ROM stands for Read-Only Memory."}, {"n": 17, "a": "FACT", "q": "HDMI can transmit digital video and audio."}, {"n": 18, "a": "FACT", "q": "A hard disk drive stores data using magnetic storage."}, {"n": 19, "a": "MYTH", "q": "An SSD uses spinning magnetic disks to store data."}, {"n": 20, "a": "FACT", "q": "Binary uses only 0 and 1."}, {"n": 21, "a": "FACT", "q": "Linux is based on the Unix design philosophy."}, {"n": 22, "a": "FACT", "q": "Linux was originally created by Linus Torvalds."}, {"n": 23, "a": "MYTH", "q": "Linux was originally developed as a commercial operating system by Microsoft."}, {"n": 24, "a": "MYTH", "q": "The Linux kernel is the same thing as a Linux distribution."}, {"n": 25, "a": "FACT", "q": "Ubuntu is a Linux distribution."}, {"n": 26, "a": "FACT", "q": "Fedora is a Linux distribution."}, {"n": 27, "a": "FACT", "q": "Debian is a Linux distribution."}, {"n": 28, "a": "FACT", "q": "Arch Linux is a Linux distribution."}, {"n": 29, "a": "FACT", "q": "Garuda Linux is based on Arch Linux."}, {"n": 30, "a": "FACT", "q": "Linux distributions can use different desktop environments."}, {"n": 31, "a": "FACT", "q": "KDE Plasma is a desktop environment."}, {"n": 32, "a": "FACT", "q": "GNOME is a desktop environment."}, {"n": 33, "a": "FACT", "q": "Linux can be used without a graphical user interface."}, {"n": 34, "a": "FACT", "q": "Linux systems can be controlled through a terminal."}, {"n": 35, "a": "MYTH", "q": "Linux is only used on desktop computers."}, {"n": 36, "a": "FACT", "q": "Linux is widely used on servers."}, {"n": 37, "a": "FACT", "q": "Linux is used in many embedded systems."}, {"n": 38, "a": "FACT", "q": "Android uses the Linux kernel."}, {"n": 39, "a": "MYTH", "q": "Every Linux distribution uses exactly the same software packages."}, {"n": 40, "a": "FACT", "q": "Linux distributions can use different package managers."}, {"n": 41, "a": "FACT", "q": "ls is commonly used to list directory contents."}, {"n": 42, "a": "FACT", "q": "cd is commonly used to change directories."}, {"n": 43, "a": "FACT", "q": "pwd displays the current working directory."}, {"n": 44, "a": "FACT", "q": "mkdir can create a directory."}, {"n": 45, "a": "FACT", "q": "touch can create an empty file."}, {"n": 46, "a": "FACT", "q": "rm can remove files."}, {"n": 47, "a": "FACT", "q": "cp can copy files."}, {"n": 48, "a": "FACT", "q": "mv can move or rename files."}, {"n": 49, "a": "FACT", "q": "cat can display file contents."}, {"n": 50, "a": "FACT", "q": "grep can search text for matching patterns."}, {"n": 51, "a": "FACT", "q": "sudo can execute commands with elevated privileges."}, {"n": 52, "a": "FACT", "q": "clear can clear the visible terminal screen."}, {"n": 53, "a": "FACT", "q": "man can display documentation for commands."}, {"n": 54, "a": "FACT", "q": "echo can print text to the terminal."}, {"n": 55, "a": "FACT", "q": "whoami can show the current user."}, {"n": 56, "a": "FACT", "q": "passwd can be used to change a user"s password."}, {"n": 57, "a": "FACT", "q": "chmod can modify file permissions."}, {"n": 58, "a": "FACT", "q": "chown can change file ownership."}, {"n": 59, "a": "FACT", "q": "kill can send signals to processes."}, {"n": 60, "a": "FACT", "q": "reboot can restart a Linux system."}, {"n": 61, "a": "FACT", "q": "Garuda Linux is an Arch-based distribution."}, {"n": 62, "a": "FACT", "q": "Garuda Linux is designed with gaming and performance-oriented users in mind."}, {"n": 63, "a": "FACT", "q": "Garuda Linux can be installed with KDE Plasma."}, {"n": 64, "a": "MYTH", "q": "Garuda Linux can only run on gaming PCs."}, {"n": 65, "a": "FACT", "q": "Garuda Linux is open source."}, {"n": 66, "a": "FACT", "q": "Garuda Linux can run applications through the terminal."}, {"n": 67, "a": "FACT", "q": "Garuda Linux uses the Linux kernel."}, {"n": 68, "a": "MYTH", "q": "Garuda Linux is completely unrelated to Arch Linux."}, {"n": 69, "a": "FACT", "q": "Garuda Linux can use Arch-compatible software repositories."}, {"n": 70, "a": "FACT", "q": "Garuda Linux can be customized extensively."}, {"n": 71, "a": "FACT", "q": "Linux users can choose between different desktop environments."}, {"n": 72, "a": "FACT", "q": "Linux distributions can have different default applications."}, {"n": 73, "a": "FACT", "q": "Garuda Linux can be installed on a virtual machine."}, {"n": 74, "a": "MYTH", "q": "Garuda Linux requires an internet connection for every application to work."}, {"n": 75, "a": "FACT", "q": "Linux systems can be dual-booted with another operating system."}, {"n": 76, "a": "FACT", "q": "Linux can access many common filesystem formats."}, {"n": 77, "a": "FACT", "q": "Linux has a graphical file manager."}, {"n": 78, "a": "FACT", "q": "Linux supports command-line package management."}, {"n": 79, "a": "MYTH", "q": "Linux cannot connect to Wi-Fi."}, {"n": 80, "a": "FACT", "q": "Linux can be used for gaming."}, {"n": 81, "a": "FACT", "q": "Arch Linux uses pacman as its primary package manager."}, {"n": 82, "a": "FACT", "q": "pacman -S can be used to install packages."}, {"n": 83, "a": "FACT", "q": "pacman -R can remove packages."}, {"n": 84, "a": "FACT", "q": "pacman -Syu is commonly used to synchronize repositories and upgrade packages."}, {"n": 85, "a": "FACT", "q": "AUR stands for Arch User Repository."}, {"n": 86, "a": "MYTH", "q": "The AUR is maintained entirely as an official Arch repository by Arch developers."}, {"n": 87, "a": "FACT", "q": "AUR packages can be installed using AUR helper tools."}, {"n": 88, "a": "FACT", "q": "yay is an AUR helper commonly used on Arch-based systems."}, {"n": 89, "a": "FACT", "q": "Package managers can resolve software dependencies."}, {"n": 90, "a": "MYTH", "q": "Installing software always requires manually compiling the source code."}, {"n": 91, "a": "FACT", "q": "A package can contain files needed by a program."}, {"n": 92, "a": "FACT", "q": "Dependencies are software components required by another program."}, {"n": 93, "a": "FACT", "q": "Updating packages can include security fixes."}, {"n": 94, "a": "FACT", "q": "Package managers can remove installed software."}, {"n": 95, "a": "FACT", "q": "Arch-based distributions can use packages from the Arch ecosystem."}, {"n": 96, "a": "FACT", "q": "A package repository is a source from which software packages can be obtained."}, {"n": 97, "a": "MYTH", "q": "Every Linux distribution uses pacman."}, {"n": 98, "a": "FACT", "q": "Debian commonly uses apt for package management."}, {"n": 99, "a": "FACT", "q": "Fedora commonly uses dnf."}, {"n": 100, "a": "FACT", "q": "Package management is one of the major differences between Linux distributions."}, {"n": 101, "a": "FACT", "q": "IP stands for Internet Protocol."}, {"n": 102, "a": "FACT", "q": "TCP stands for Transmission Control Protocol."}, {"n": 103, "a": "FACT", "q": "UDP stands for User Datagram Protocol."}, {"n": 104, "a": "FACT", "q": "HTTP is a protocol used for web communication."}, {"n": 105, "a": "FACT", "q": "HTTPS provides encrypted communication using TLS."}, {"n": 106, "a": "FACT", "q": "DNS translates domain names into IP addresses."}, {"n": 107, "a": "FACT", "q": "A router can forward packets between networks."}, {"n": 108, "a": "FACT", "q": "MAC addresses are associated with network interfaces."}, {"n": 109, "a": "FACT", "q": "IPv4 addresses are 32 bits long."}, {"n": 110, "a": "FACT", "q": "IPv6 addresses are 128 bits long."}, {"n": 111, "a": "FACT", "q": "ping can be used to test network reachability."}, {"n": 112, "a": "FACT", "q": "localhost commonly refers to the local computer."}, {"n": 113, "a": "FACT", "q": "The IP address 127.0.0.1 is commonly associated with localhost in IPv4."}, {"n": 114, "a": "FACT", "q": "Ethernet is a type of network technology."}, {"n": 115, "a": "MYTH", "q": "Wi-Fi is a wired networking technology."}, {"n": 116, "a": "FACT", "q": "A firewall can help control network traffic."}, {"n": 117, "a": "FACT", "q": "A VPN can encrypt network traffic between the device and VPN endpoint."}, {"n": 118, "a": "MYTH", "q": "Every device connected to the internet must have a public IP address."}, {"n": 119, "a": "FACT", "q": "NAT can allow multiple private devices to share a public IP address."}, {"n": 120, "a": "MYTH", "q": "DNS is responsible for storing every website"s actual content."}, {"n": 121, "a": "FACT", "q": "A strong password can improve account security."}, {"n": 122, "a": "MYTH", "q": "Using the same password everywhere is a good security practice."}, {"n": 123, "a": "FACT", "q": "Multi-factor authentication can improve account security."}, {"n": 124, "a": "FACT", "q": "Phishing attempts can be delivered through email."}, {"n": 125, "a": "FACT", "q": "Malware is software designed to perform harmful or unwanted actions."}, {"n": 126, "a": "FACT", "q": "A computer virus is one type of malware."}, {"n": 127, "a": "FACT", "q": "Ransomware can encrypt files and demand payment."}, {"n": 128, "a": "MYTH", "q": "Antivirus software can detect every piece of malware."}, {"n": 129, "a": "FACT", "q": "Software updates can contain security patches."}, {"n": 130, "a": "FACT", "q": "Social engineering attacks can target human behavior."}, {"n": 131, "a": "FACT", "q": "Encryption converts information into a form intended to prevent unauthorized access."}, {"n": 132, "a": "MYTH", "q": "Hashing and encryption are exactly the same process."}, {"n": 133, "a": "MYTH", "q": "HTTPS means a website is automatically trustworthy."}, {"n": 134, "a": "FACT", "q": "Public Wi-Fi can present security risks."}, {"n": 135, "a": "FACT", "q": "Two-factor authentication is an example of multi-factor authentication."}, {"n": 136, "a": "FACT", "q": "A password manager can help generate and store passwords."}, {"n": 137, "a": "FACT", "q": "Backups can help recover data after ransomware or hardware failure."}, {"n": 138, "a": "MYTH", "q": "sudo should always be used for every Linux command."}, {"n": 139, "a": "MYTH", "q": "Linux systems are completely immune to malware."}, {"n": 140, "a": "FACT", "q": "Keeping software updated can reduce exposure to known vulnerabilities."}, {"n": 141, "a": "FACT", "q": "Python is a programming language."}, {"n": 142, "a": "FACT", "q": "JavaScript is commonly used for web development."}, {"n": 143, "a": "MYTH", "q": "HTML is a programming language."}, {"n": 144, "a": "FACT", "q": "CSS is primarily used to style web pages."}, {"n": 145, "a": "FACT", "q": "C is a programming language."}, {"n": 146, "a": "MYTH", "q": "Java and JavaScript are the same programming language."}, {"n": 147, "a": "FACT", "q": "An algorithm is a sequence of steps for solving a problem."}, {"n": 148, "a": "FACT", "q": "A compiler can translate source code into another form that can be executed or further processed."}, {"n": 149, "a": "FACT", "q": "An interpreter generally executes or evaluates code through a runtime rather than producing a standalone native executable first."}, {"n": 150, "a": "FACT", "q": "A variable can store a value used by a program."}, {"n": 151, "a": "FACT", "q": "A loop can repeat instructions."}, {"n": 152, "a": "FACT", "q": "An if statement can be used for conditional execution."}, {"n": 153, "a": "FACT", "q": "A function can group reusable code."}, {"n": 154, "a": "FACT", "q": "Git is a version control system."}, {"n": 155, "a": "MYTH", "q": "GitHub and Git are exactly the same thing."}, {"n": 156, "a": "MYTH", "q": "Open-source software always means software is completely free of charge."}, {"n": 157, "a": "FACT", "q": "Source code is the human-readable code used to build software."}, {"n": 158, "a": "FACT", "q": "Bugs are errors or unintended behavior in software."}, {"n": 159, "a": "FACT", "q": "Debugging is the process of identifying and fixing software problems."}, {"n": 160, "a": "MYTH", "q": "All programming languages use the same syntax."}, {"n": 161, "a": "FACT", "q": "The kernel is a core component of an operating system."}, {"n": 162, "a": "FACT", "q": "The operating system manages system resources."}, {"n": 163, "a": "FACT", "q": "A process is a program currently being executed."}, {"n": 164, "a": "FACT", "q": "Multiple processes can run concurrently on a modern operating system."}, {"n": 165, "a": "FACT", "q": "A thread is a unit of execution within a process."}, {"n": 166, "a": "FACT", "q": "Virtual memory can use storage as an extension of physical memory."}, {"n": 167, "a": "FACT", "q": "The Linux kernel can manage hardware resources."}, {"n": 168, "a": "FACT", "q": "A device driver allows software to communicate with hardware."}, {"n": 169, "a": "MYTH", "q": "The kernel is normally the same thing as the desktop environment."}, {"n": 170, "a": "FACT", "q": "Linux is a monolithic kernel."}, {"n": 171, "a": "FACT", "q": "A shell can provide a command-line interface to an operating system."}, {"n": 172, "a": "FACT", "q": "Bash is a commonly used Unix shell."}, {"n": 173, "a": "FACT", "q": "Zsh is a shell."}, {"n": 174, "a": "MYTH", "q": "The terminal and shell are exactly the same thing."}, {"n": 175, "a": "FACT", "q": "Systemd is used as an init system on many Linux distributions."}, {"n": 176, "a": "FACT", "q": "Linux can run without a graphical desktop environment."}, {"n": 177, "a": "FACT", "q": "File permissions are important in Unix-like operating systems."}, {"n": 178, "a": "FACT", "q": "Linux uses a hierarchical filesystem."}, {"n": 179, "a": "FACT", "q": "/home is commonly used for users" personal directories."}, {"n": 180, "a": "FACT", "q": "/etc commonly contains system configuration files."}, {"n": 181, "a": "FACT", "q": "The root user has extensive privileges on a Linux system."}, {"n": 182, "a": "FACT", "q": "chmod 777 gives read, write, and execute permissions to everyone for a file or directory."}, {"n": 183, "a": "MYTH", "q": "The command chmod 000 gives everyone full permissions."}, {"n": 184, "a": "FACT", "q": "In Linux, / represents the root of the filesystem hierarchy."}, {"n": 185, "a": "FACT", "q": "/dev commonly contains device files."}, {"n": 186, "a": "FACT", "q": "/proc provides a virtual filesystem containing information about processes and the kernel."}, {"n": 187, "a": "FACT", "q": "/tmp is commonly used for temporary files."}, {"n": 188, "a": "MYTH", "q": "Linux file extensions are always required for the operating system to recognize executable files."}, {"n": 189, "a": "FACT", "q": "A file can be executable in Linux without having .exe as its extension."}, {"n": 190, "a": "FACT", "q": "grep can be combined with pipes to process command output."}, {"n": 191, "a": "FACT", "q": "The | symbol can pipe the output of one command into another command."}, {"n": 192, "a": "FACT", "q": "> can redirect output to a file."}, {"n": 193, "a": "FACT", "q": ">> can append output to a file."}, {"n": 194, "a": "FACT", "q": "&& can conditionally execute the next command if the previous command succeeds."}, {"n": 195, "a": "FACT", "q": "ps can display information about running processes."}, {"n": 196, "a": "FACT", "q": "top can display real-time process and system information."}, {"n": 197, "a": "FACT", "q": "df can display filesystem disk-space usage."}, {"n": 198, "a": "FACT", "q": "du can display disk usage of files and directories."}, {"n": 199, "a": "FACT", "q": "free can display information about memory usage."}, {"n": 200, "a": "MYTH", "q": "Linux is only useful for programmers."}];
+let pool=[], game=[], pos=0, score=0, player="";
+const $=id=>document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function startGame(){
+ player=$("name").value.trim()||"Anonymous";
+ pool=shuffle(QUESTIONS); game=pool.slice(0,5); pos=0; score=0;
+ $("start").classList.add("hidden"); $("leaderboard").classList.add("hidden"); $("final").classList.add("hidden"); $("game").classList.remove("hidden");
+ renderQuestion();
+}
+function renderQuestion(){
+ const item=game[pos]; $("progressText").textContent=`QUESTION ${pos+1} OF 5`; $("scoreText").textContent=`Score: ${score}`;
+ $("bar").style.width=`${((pos+1)/5)*100}%`; $("qnum").textContent=`QUESTION #${item.n}`;
+ $("question").textContent=item.q; $("feedback").textContent="";
+ document.querySelectorAll(".answer").forEach(b=>b.disabled=false);
+}
+function beep(type){
+ const C=window.AudioContext||window.webkitAudioContext; if(!C)return;
+ const ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();
+ o.connect(g);g.connect(ctx.destination);o.type="sine";o.frequency.value=type==="correct"?740:180;
+ g.gain.setValueAtTime(.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.12,ctx.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.22);
+ o.start();o.stop(ctx.currentTime+.23);
+}
+function submitAnswer(choice){
+ document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+ const correct=choice===(game[pos].a==="FACT");
+ if(correct){score++;beep("correct");$("feedback").textContent="✓ CORRECT!";$("feedback").style.color="var(--green)";}
+ else{beep("wrong");$("feedback").textContent="✕ NOT QUITE!";$("feedback").style.color="var(--red)";}
+ setTimeout(()=>{
+   if(pos===4) finish(); else {pos++;renderQuestion();}
+ },700);
+}
+function finish(){
+ $("game").classList.add("hidden"); $("final").classList.remove("hidden");
+ $("finalScore").textContent=`${score} / 5`;
+ $("finalDetails").textContent=`Player: ${player}`;
+ const perfect=score===5;
+ $("finalTitle").textContent=perfect?"PERFECT!":"CHALLENGE COMPLETE";
+ $("finalEyebrow").textContent=perfect?"🐉 LINUX LEGEND":"FACT OR CAP";
+ $("finalMessage").textContent=perfect?"🔥 PERFECT SCORE! You got all 5 questions correct! 🔥":score>=3?"Great job! Try again and aim for a perfect score!":"Try again or better luck next time!";
+ if(perfect){$("finalScore").classList.add("perfect");confetti();beep("correct");beep("correct");}
+ else $("finalScore").classList.remove("perfect");
+ saveScore();
+}
+function saveScore(){
+ let b=JSON.parse(localStorage.getItem("garudaLeaderboard")||"[]");
+ b.push({name:player,score:score,date:new Date().toLocaleString()});
+ b.sort((a,b)=>b.score-a.score);
+ localStorage.setItem("garudaLeaderboard",JSON.stringify(b.slice(0,20)));
+}
+function showLeaderboard(){
+ $("start").classList.add("hidden");$("game").classList.add("hidden");$("final").classList.add("hidden");$("leaderboard").classList.remove("hidden");
+ let b=JSON.parse(localStorage.getItem("garudaLeaderboard")||"[]");
+ $("board").innerHTML=b.length?`<table><tr><th>#</th><th>PLAYER</th><th>SCORE</th><th>DATE</th></tr>${b.map((x,i)=>`<tr><td class="rank">${i+1}</td><td>${esc(x.name)}</td><td>${x.score} / 5</td><td>${esc(x.date)}</td></tr>`).join("")}</table>`:"<p class='sub center'>No scores yet. Be the first!</p>";
+}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function newPlayer(){$("final").classList.add("hidden");$("leaderboard").classList.add("hidden");$("start").classList.remove("hidden");$("name").value="";$("name").focus()}
+function goStart(){$("leaderboard").classList.add("hidden");$("start").classList.remove("hidden")}
+function confetti(){
+ for(let i=0;i<100;i++){let x=document.createElement("i");x.className="confetti";x.style.left=Math.random()*100+"vw";x.style.background=`hsl(${Math.random()*360},100%,65%)`;x.style.animationDelay=Math.random()*1.2+"s";document.body.appendChild(x);setTimeout(()=>x.remove(),3500);}
+}
+</script>
+</body>
+</html>
